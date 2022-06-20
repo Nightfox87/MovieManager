@@ -61,7 +61,7 @@ public class MovieManagerTest {
     }
 
     @Test
-    void shouldFindLastWithPrescribedLimit() {
+    void shouldFindLastWithPrescribedMiddleLimit() {
         MovieManager manager = new MovieManager(3);
         manager.add(first);
         manager.add(second);
@@ -74,5 +74,36 @@ public class MovieManagerTest {
 
         Assertions.assertArrayEquals(expected, actual);
     }
+
+    @Test
+    void shouldFindLastWithPrescribedHighLimit() {
+        MovieManager manager = new MovieManager(5);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+
+        MovieData[] actual = manager.findLast();
+        MovieData[] expected = {fifth, fourth, third, second, first};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
+    @Test
+    void shouldFindLastWithPrescribedLowLimit() {
+        MovieManager manager = new MovieManager(1);
+        manager.add(first);
+        manager.add(second);
+        manager.add(third);
+        manager.add(fourth);
+        manager.add(fifth);
+
+        MovieData[] actual = manager.findLast();
+        MovieData[] expected = {fifth};
+
+        Assertions.assertArrayEquals(expected, actual);
+    }
+
 
 }
